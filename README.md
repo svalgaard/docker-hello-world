@@ -2,7 +2,8 @@
 
 This is an almost minimal docker image running a python webserver
 on port 8008.
-
+Mount a folder on top of `/www/public` using `-v` to show
+your own content.
 
 ## Image ##
 
@@ -39,7 +40,7 @@ using `-P`.
 Use `docker port CONTAINER` to see which port was used:
 
 ```bash
-docker run --name hello --detach -P svalgaard/hello-world
+docker run --name hello --detach -P hello-world
 docker port hello
 ```
 
@@ -104,4 +105,5 @@ If this fails with
 `denied: requested access to the resource is denied`,
 you must first login using `docker login`.
 
-If your code is on GitHub, a better solution is to setup a build trigger which automatically pulls updates from GitHub to docker.
+If your code is on GitHub, a better solution is to setup a build
+trigger which automatically pulls updates from GitHub to Docker.
