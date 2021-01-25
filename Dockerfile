@@ -25,3 +25,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 VOLUME /www
 
 ENTRYPOINT ["python", "-m", "http.server", "--directory", "/www/public", "8008"]
+
+# Specify that we listen on port 8008/tcp
+EXPOSE 8008
