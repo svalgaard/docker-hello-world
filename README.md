@@ -34,25 +34,10 @@ Start your image. Forward port 8008 to port 8008 inside the container:
 docker run --name hello -d -p 8008:8008 hello-world
 ```
 
-Visit http://localhost:8000/ to see the mini website.
-
 See a list of containers:
 
 ```bash
 docker container ls
-```
-
-See interesting server logs (use `-f` to follow log output):
-
-```bash
-docker logs hello -f
-```
-
-Start a bash shell "inside" the docker container.
-Note that this is (by design) a very minimal Debian server:
-
-```bash
-docker exec -it hello /bin/bash
 ```
 
 Delete and stop the container again:
@@ -61,3 +46,44 @@ Delete and stop the container again:
 docker stop hello
 docker container rm hello
 ```
+
+## Working with the container
+
+Visit http://localhost:8008/ to see the mini website.
+Or use curl or wget to to get the hello.txt file:
+
+```bash
+curl http://localhost:8008/hello.txt
+wget -O- http://localhost:8008/hello.txt
+```
+
+See server logs (use `-f` to follow log output):
+
+```bash
+docker logs hello -f
+```
+
+Start a bash shell "inside" the docker container.
+Note that by design this is a very minimal Debian server:
+
+```bash
+docker exec -it hello /bin/bash
+```
+
+## Make your docker image appear on hub.docker.com ##
+
+Use the same name for the image as the repository on docker:
+
+```bash
+docker build --tag svalgaard/hello-world
+```
+
+Push the image to docker hub:
+
+```bash
+docker push svalgaard/hello-world
+```
+
+If this fails with
+`denied: requested access to the resource is denied`,
+you must first login using `docker login`
