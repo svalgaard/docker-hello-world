@@ -31,7 +31,23 @@ docker image rm -f --tag hello-world
 Start your image. Forward port 8008 to port 8008 inside the container:
 
 ```bash
-docker run --name hello -d -p 8008:8008 hello-world
+docker run --name hello --detach -p 8008:8008 hello-world
+```
+
+You can also ask docker to find an available port itself
+using `-P`.
+Use `docker port CONTAINER` to see which port was used:
+
+```bash
+docker run --name hello --detach -P svalgaard/hello-world
+docker port hello
+```
+
+You can also ask docker to use a local folder inside the
+container:
+
+```bash
+docker run --name hello --detach -P -v /tmp:/www/public hello-world
 ```
 
 See a list of containers:
@@ -86,4 +102,6 @@ docker push svalgaard/hello-world
 
 If this fails with
 `denied: requested access to the resource is denied`,
-you must first login using `docker login`
+you must first login using `docker login`.
+
+If your code is on GitHub, a better solution is to setup a build trigger which automatically pulls updates from GitHub to docker.
